@@ -6,11 +6,10 @@ excerpt: "This post reflects the updates based on the GDPR requirements and poli
 image: "/img/image/jekyll_post.jpg"
 show-avatar: true
 category: Jekyll
-tags: ["Jekyll", "Privacy"]
-comments: true
+tags: ["Jekyll", "MFQ"]
+comments: false
 googlefonts: ["Share+Tech+Mono"]
 ---
-
 {% include about.html footer=true readingtime=true %}
 
 ## General
@@ -37,7 +36,6 @@ The following table shows who could get access to your public IP while browsing 
 | IP   | Me            | Matomo        | Web Statistics | 7 days |
 | IP   | Disqus        | Browser Access | Comment Service | **??** |
 | IP   | cloudflare | Shields.io | **??** | **??** |
-
 
 ### Cookies
 
