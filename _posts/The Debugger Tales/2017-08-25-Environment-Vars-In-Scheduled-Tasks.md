@@ -1,138 +1,61 @@
 ---
 layout: post
-title: "The Debugger Tales #1"
-subtitle: Environment Variables In Scheduled Tasks
-excerpt: "This post covers a short story about why you shouldn't use profile related environment vars in
-scripts. Especially if you need to run them as scheduled tasks."
-image: /img/image/tdt1.png
+title: "Multiple Drug Resistance"
+subtitle: Multiple Drug Resistance
+excerpt: "Since the appearance of antibiotics, bacteria seem to have lost their brilliance on the medical stage."
+image: /img/superBac/picture1.png
 show-avatar: true
-bigimg: /img/bigimg/tdt_back.png
+bigimg: /img/superBac/picture1.png
 category: "The Debugger Tales"
 tags: [The Debugger Tales, Scheduled Tasks, Environment Vars]
 
 # ---- Theme based optional vars ---- #
-comments: true
+comments: false
 
 # use-site-title: # (false) | true
 ---
 {% include about.html %}
-## The Scenario
-I recently worked on a controller script to synchronize new active directory users with a two-factor authentication
-solution. The controller script itself calls different functions from preexisting modules. It is triggered by the
-windows task scheduler on its dedicated job server.
+## **Generation And Harm of Superbugs**
+Since the appearance of antibiotics, bacteria seem to have lost their brilliance on the medical stage. Whether it is a cold, fever or surgery, a small dose of antibiotics will be used, and the bacteria will surrender. However, with the passage of time, bacteria evolved, slowly developing shields resisting the sword of antibiotics. Then, bacteria become "superbugs." In recent years, superbugs have caused great harm to human health. 
 
-The described scenario worked for about a year but suddenly the responsible sysop reported a problem:
+## So what is "superbug"? Is it a mutant bacterium? 
 
-> **SysOp:** "Hi Marco, We've got a problem with your 2FA Sync tool. I didn't change anything but it stopped working
-this morning. Could you take a look at it?"
->
-> **Me:** "Sure. But what do you mean exactly with **it stopped working**? Did you get an error message in the
-powershell console or an corresponding eventlog entry?"
->
-> **SysOp:** "Well, I didn't get the daily reports and the needed files were not created."
->
-> **Me:** "Ok.Just give me a couple of minutes. It shouldn't be a big problem!"
+In fact, superbacteria do not specifically refer to a certain kind of bacteria. The medical community defines them as "multi drug resistant bacteria", which generally refers to those bacteria that have have developed resistance to antibiotics. Superbugs are hardy, adaptable, and multiply with astonishing speed. But the scariest thing about superbugs is not the characteristics listed above, but their resistance to common bactericidal drugs, antibiotics. Patients infected with these "superbugs" are often left with no cure, and can only wait to die. 
 
-{: .box-note}
-*... And that was truly my assumption. It turned out I would search for a solution the whole day.*
+![With locked user](/img/superBac/picture2.png){: .mx-auto.d-block :}
 
-## Analysis
+### **These are all "raised" by antibiotics.** 
 
-### Manual Execution
+Initially, superbugs were found in hospitals, where the balance between antibiotics and bacterial resistance was upset because antibiotics abuse. Bacteria which were originally resistant to only one antibiotic gradually got power to tolerate multiple antimicrobial drugs through constant wrestling and evolution. **So to speak, the superbug is actually human "feed" out.**
 
-So first things first. I checked if someone broke the dependencies with the modules and tried to run the script
-itself.
+### **What is antibiotics abuse?** 
 
-```console
-~> cd C:\Scripts\2FA
-~> .\Invoke-2FAUserSync.ps1 -MailDest 'marco.blessing@gmail.com' -WhatIf -Debug -Verbose
-```
-![Console Run Result](/img/posts/2FAConsoleRun.jpg)
+In a word, any overtime, excessive, inappropriate use or non-standard use of antibiotics belong to antibiotics abuse. The emergence of bacterial drug resistance is a natural law, but the large-scale occurrence and spread of this phenomenon is a human error. It must be pointed out that the biggest reason for the antibiotics abuse is the lack of understanding of the advantages and disadvantages of antibiotics! 
 
-Ok it works. There are some user related warnings, but it doesn't matter right now.
+![With locked user](/img/superBac/picture3.png){: .mx-auto.d-block :}
 
-### Execute it like a scheduled tasks
+## So how should we deal with it? Is it really hopeless?
 
-Next step is to check if the the scheduled task itself is able to call it. Therefore I take the command itself form
-the task and try to run it. Either form the *Start->Run* window or the *command shell*
+Facing superbug, what would happen if stronger antibiotics were used? Many studies and clinical cases have found that high-intensity antibiotics have greater side effects on the human body than ordinary antibiotics, and the disadvantages of treatment outweigh the advantages. In the case of infection, patients are very prone to more serious chain reactions, such as liver and kidney failure and damage to the immune system. At this point, even a simple cold will deprive a person lives, because the body can no longer fight off bacterial infections. 
 
-```console
-C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "&{C:\Scripts\2FA\Invoke-2FAUserSync.ps1 -MailDest 'marco.blessing@gmail.com' -WhatIf}"
-```
+![With locked user](/img/superBac/picture4.png){: .mx-auto.d-block :}
 
-This returned the same results like in first run in the powershell console. Thats great. Up to now it means, there
-is no major problem with the script itself and the execution command string with its arguments is correct.
+In other words, it’s very difficult to kill bacteria and not kill person. So we really can't solve the superbug problem? Let's back to nature, there is **natural bacteria killer: phage**. “Traditional antibiotics are losing their edge, and phages are the new weapon in our battle against bacteria” says Benjamin K. Chan, PhD. Phagotherapy, developed based on this natural law, could be an effective way to target superbugs.
 
-### Run as scheduled task
+## **To resist powerful superbugs, people must first strengthen ourselves!**
 
-So lets finally run the task itself -> That's strange - It works as well. I expected it to fail like the Sysop
-colleague said.
+ 
 
-### Run the scheduled task triggered by time event
+- Rational use of antibiotics and prevention of antibiotics abuse are the most important means to prevent the prevalence of superbugs. The use of antibiotics should adhere to the "four noes" principle: do not buy drugs at will, do not choose drugs by yourself, do not take and stop drugs at will.
 
-Let's schedule the task to run it once in 5 minutes up to now. -> Well, it worked again, and again, and again.
-So I called my colleague and told him I can't reproduce the error and it seems to work again. I scheduled the
-task as usual to run every morning 5 am and logged off.
+- Pay attention to personal hygiene, especially wash hands correctly. And you’d better strengthen physical exercise, eat reasonably, pay attention to rest and improve the body's resistance.
 
-The next morning came - The same problem occurred. So I repeated every test again and tried it at least 10 times.
-
-## The Problem
-
-Later this day someone forgot accidentally to log off with the service account and I could reproduce it:
-If the task gets triggered while the service account was logged in or locked, it runs without any problems. But if
-someone logs off the service account, like you normally would after you finished your work remotely, it fails.
-
-So I continued inspecting the task and double checked the task details. But it didn't work either.
-
-I stumbled upon a post from the [Rambling Cookie Monster](http://ramblingcookiemonster.github.io/Task-Scheduler/).
-While reading the article started wondering if I used any types or assemblies which doesn't work in the non
-interactive mode. This would explain why i ran in a user context while the service account is logged in. So I
-checked the scripts again and even the other modules which I used.
-
-However, there are two things I'm wondering about:
-
-- How could it be, that this script runs for about a year now an nobody noticed the problem earlier?
-  This means basically no one logged of the service account for about a year.
-- And second: No one tested it correctly before it is used in a production environment!
+- Self immunity is the best weapon: because superbugs are difficult to treat, the best way to deal with it is defense. When the immunity is strong and the immune potential of the body is stimulated, the superbugs will be shielded!
 
 
-## The Cause
-What if the environment variables I'm using is causing this? - So I decided to create an other scheduled task which
-writes all the variable values into a temp file. Afterwards it should be easy to compare the values.
 
-The scheduled tasks looks like this:
-
-```console
-# Run
-C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
-
-# Args
--NoLogo -NonInteractive -NoProfile -Command "&{
-    Get-Date | Out-File 'C:\vars.txt' -Encoding utf8 -Force -Append;
-    Get-ChildItem Env: | Out-File 'C:\vars.txt' -Encoding utf8 -Force -Append
-}"
-```
-
-And now we can compare the results. I ran task while the service account was locked and logged off
+![With locked user](/img/superBac/picture5.png){: .mx-auto.d-block :}
 
 
-**With service account locked**
-![With locked user](/img/posts/stask1.png)
 
-**With service account logged off**
-![With locked user](/img/posts/stask2.png)
 
-Do you notice the highlighted variable called `APPDATA`? - It's missing while the service account is logged off!
-And that's the problem. The controller script uses a credential manager which tries to read a credential store in
-the user profile.
-
-## Solution
-
-The solution here is to change the credential store location to `ProgramData` which exists in both scenarios.
-
-## Final Conclusion
-
-If there is one thing I've learned form this: Choose environment variables wisely. You never know how your function
-will be used in the future. Especially when you decided using profile related environment variables :D
-
-Did you experience a similar situation? - Let me know...
