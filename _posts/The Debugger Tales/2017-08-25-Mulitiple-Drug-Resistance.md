@@ -14,7 +14,7 @@ comments: false
 
 # use-site-title: # (false) | true
 ---
-{% include about.html %}
+
 ## **Generation And Harm of Superbugs**
 Since the appearance of antibiotics, bacteria seem to have lost their brilliance on the medical stage. Whether it is a cold, fever or surgery, a small dose of antibiotics will be used, and the bacteria will surrender. However, with the passage of time, bacteria evolved, slowly developing shields resisting the sword of antibiotics. Then, bacteria become "superbugs." In recent years, superbugs have caused great harm to human health.
 

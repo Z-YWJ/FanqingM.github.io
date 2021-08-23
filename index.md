@@ -4,7 +4,8 @@ title: IGEM
 show-avatar: true
 subtitle: An interesting popular science website
 bigimg:
-  - 'img/bigimg/bg-home.jpg': "Test Photo"
+  - 'img/bigimg/home1.png': "TJU"
+  - 'img/bigimg/home2.png': "XJTLU"
 use-site-title: true
 css: '/css/extend-home.css'
 ---
