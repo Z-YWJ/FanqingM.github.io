@@ -2,12 +2,12 @@
 layout: post
 title: "Multiple Drug Resistance"
 subtitle: Multiple Drug Resistance
-excerpt: "Since the appearance of antibiotics, bacteria seem to have lost their brilliance on the medical stage."
+# excerpt: 
 image: /img/superBac/picture1.png
 show-avatar: true
 bigimg: /img/superBac/picture1.png
-category: "The Debugger Tales"
-tags: [The Debugger Tales, Scheduled Tasks, Environment Vars]
+# category: 
+tags: ["TJU"]
 
 # ---- Theme based optional vars ---- #
 comments: false
