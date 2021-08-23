@@ -29,7 +29,7 @@ navbar-links:
   # Resources:
   #   - Powershell: "powershell-resources"
   About:
-    - Me: "aboutme"
+    # - Me: "aboutme"
     - This Blog: "aboutthisblog"
 
 
