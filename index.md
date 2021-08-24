@@ -1,6 +1,6 @@
 ---
 layout: page
-title: IGEM
+title: BacterioPhage
 show-avatar: true
 subtitle: An interesting popular science website
 bigimg:
