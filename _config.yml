@@ -24,18 +24,17 @@ title: IGEM
 # List of links in the navigation bar
 navbar-links:
   Blog:
-    - Posts: "blog"
     - Tags: "tags"
   # Resources:
   #   - Powershell: "powershell-resources"
-  About:
-    # - Me: "aboutme"
-    - This Blog: "aboutthisblog"
+  # About:
+  #   # - Me: "aboutme"
+  #   - This Blog: "aboutthisblog"
 
 
 # --- Google custom search config --- #
 # search page name search -> /seach.md
-nav-search: "search"
+# nav-search: "search"
 # google-site-verification
 #google-site-verification: ''
 
@@ -74,7 +73,7 @@ footer-img: "/img/concrete-texture.png"
 # Change all these values or delete the ones you don't want.
 # Important: you must keep the "name" parameter, everything else you can remove
 author:
-  name: Tongji University
+  name: Tongji University And Xi'an Jiaotong-Liverpool University
 
 # Select your active Social Network Links.
 # Uncomment the links you want to show in the footer and add your information to each link.
@@ -84,7 +83,7 @@ social-network-links:
   github: FanqingM
   # stackoverflow: "5222635/ocram85"
   # twitter: tar_honar
-  email: "marco.blessing@googlemail.com"
+  email: "tj_software2021@163.com"
   # email: "marco.blessing@googlemail.com"
   # linkedin: marco-blessing-884642109
   # rss: false
